@@ -22,37 +22,40 @@ impl Counter {
     }
 }
 
-fn main() {
+fn part1(){
     let filename = "./src/2/input.txt";
     let file = File::open(filename).unwrap();
     let reader = BufReader::new(file);
     let mut valid = 0;
 
-    // part 1
-    // for line in reader.lines() {
-    //     let line = line.unwrap(); 
-    //     let line_vec = line.split(" ").collect::<Vec<&str>>();
-    //     let (range, ch, password) = (line_vec[0], line_vec[1].as_bytes()[0] as char, line_vec[2]);
-    //     let range_vec = range.split("-").collect::<Vec<&str>>();
-    //     let (lbound, ubound) = (range_vec[0].parse::<i32>().unwrap(), range_vec[1].parse::<i32>().unwrap());
+    for line in reader.lines() {
+        let line = line.unwrap(); 
+        let line_vec = line.split(" ").collect::<Vec<&str>>();
+        let (range, ch, password) = (line_vec[0], line_vec[1].as_bytes()[0] as char, line_vec[2]);
+        let range_vec = range.split("-").collect::<Vec<&str>>();
+        let (lbound, ubound) = (range_vec[0].parse::<i32>().unwrap(), range_vec[1].parse::<i32>().unwrap());
         
-    //     let c_counter = Counter::new(password.to_string());
-    //     let c_map = c_counter.count_map;
+        let c_counter = Counter::new(password.to_string());
+        let c_map = c_counter.count_map;
 
-    //     if !c_map.contains_key(&ch){
-    //         continue
-    //     } else if c_map.get(&ch).unwrap() > &ubound || c_map.get(&ch).unwrap() < &lbound{
-    //         continue
-    //     } else {
-    //         valid += 1
-    //     }
+        if !c_map.contains_key(&ch){
+            continue
+        } else if c_map.get(&ch).unwrap() > &ubound || c_map.get(&ch).unwrap() < &lbound{
+            continue
+        } else {
+            valid += 1
+        }
+    }
+    println!("{} valid entries", valid);
 
-    //     println!("{} valid entries", valid);
+}
 
-    // }
+fn part2(){
+    let filename = "./src/2/input.txt";
+    let file = File::open(filename).unwrap();
+    let reader = BufReader::new(file);
+    let mut valid = 0;
 
-
-    // part 2 
     for line in reader.lines() {
         let line = line.unwrap(); 
         let line_vec = line.split(" ").collect::<Vec<&str>>();
@@ -72,5 +75,12 @@ fn main() {
         }
     }
     println!("{} valid entries", valid);
+
+}
+
+fn main() {
+
+    part1();
+    part2();
 
 }

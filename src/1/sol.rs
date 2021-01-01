@@ -2,27 +2,28 @@ use std::io::{BufRead, BufReader};
 use std::fs::File;
 use std::collections::HashSet;
 
-fn main() {
+fn part1(){
     let filename = "./src/1/input.txt";
     let file = File::open(filename).unwrap();
     let reader = BufReader::new(file);
 
+    let mut match_set = HashSet::new();
+    for line in reader.lines() {
+        let line = line.unwrap(); // Ignore errors.
+        let val1 = line.parse::<i32>().unwrap();
+        let val2 = 2020 - val1;
+        if match_set.contains(&val2) {
+            println!("answer is {}", val1 * val2);
+        } else {
+            match_set.insert(val1);
+        }
+    }
+}
 
-    // part 1
-    // let mut match_set = HashSet::new();
-    // for line in reader.lines() {
-    //     let line = line.unwrap(); // Ignore errors.
-    //     let val1 = line.parse::<i32>().unwrap();
-    //     let val2 = 2020 - val1;
-    //     if match_set.contains(&val2) {
-    //         println!("answer is {}", val1 * val2);
-    //     } else {
-    //         match_set.insert(val1);
-    //     }
-    // }
-
-    // part 2
-
+fn part2(){
+    let filename = "./src/1/input.txt";
+    let file = File::open(filename).unwrap();
+    let reader = BufReader::new(file);
     let mut expense_list = Vec::new(); 
     
     for line in reader.lines() {
@@ -54,4 +55,11 @@ fn main() {
             }
         }
     }
+
+}
+
+fn main() {
+    part1();
+    part2();
+
 }
